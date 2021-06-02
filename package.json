@@ -39,6 +39,7 @@
   "devDependencies": {
     "@testing-library/dom": "^7.31.0",
     "eslint-plugin-jest-dom": "^3.9.0",
-    "eslint-plugin-testing-library": "^4.6.0"
+    "eslint-plugin-testing-library": "^4.6.0",
+    "msw": "^0.29.0"
   }
 }
