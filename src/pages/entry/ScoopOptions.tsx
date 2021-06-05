@@ -1,6 +1,9 @@
 import { Scoop } from "../../types";
 
-type ScoopOptionsProps = Scoop;
+type ScoopOptionsProps = Scoop & {
+  count: number;
+  updateCount: (newCount: string) => void;
+};
 
 export const ScoopOptions = ({ name, imagePath }: ScoopOptionsProps) => {
   return (
