@@ -4,6 +4,6 @@ export function calculateSubTotal<
   return (
     Array.from(mapObject[key].values()).reduce((prev, curr) => {
       return prev + curr;
-    }) * price
+    }, 0) * price
   );
 }

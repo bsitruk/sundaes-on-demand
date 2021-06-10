@@ -5,6 +5,7 @@ import ScoopOptions from "./ScoopOptions";
 import ToppingOptions from "./ToppingOptions";
 import Alert from "react-bootstrap/Alert";
 import { useOrderCtx } from "../../contexts/OrderContext";
+import { toCurrency } from "../../utils/toCurrency";
 
 type OptionsProps = {
   optionType: "scoops" | "toppings";
@@ -13,7 +14,7 @@ type OptionsProps = {
 export const Options = ({ optionType }: OptionsProps) => {
   const [items, setItems] = useState<Scoop[] | Topping[]>([]);
   const [error, setError] = useState("");
-  const { scoops, toppings, updateItemCount } = useOrderCtx();
+  const { scoops, toppings, updateItemCount, totals } = useOrderCtx();
 
   useEffect(() => {
     axios
@@ -25,6 +26,8 @@ export const Options = ({ optionType }: OptionsProps) => {
         }
       });
   }, [optionType]);
+
+  const title = optionType[0].toUpperCase() + optionType.slice(1).toLowerCase();
 
   let scoopsOrToppings = null;
   if (optionType === "scoops") {
@@ -54,7 +57,18 @@ export const Options = ({ optionType }: OptionsProps) => {
   }
 
   return (
-    <>{error ? <Alert variant="warning">{error}</Alert> : scoopsOrToppings}</>
+    <>
+      {error ? (
+        <Alert variant="warning">{error}</Alert>
+      ) : (
+        <>
+          <p>
+            {title} total: {toCurrency(totals[optionType])}
+          </p>
+          <div>{scoopsOrToppings}</div>
+        </>
+      )}
+    </>
   );
 };
 

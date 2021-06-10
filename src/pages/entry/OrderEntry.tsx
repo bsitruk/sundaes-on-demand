@@ -5,11 +5,11 @@ export default function OrderEntry() {
   return (
     <div>
       <h2>Scoops</h2>
-      <p>{SCOOPS_PRICE}</p>
+      <p>{SCOOPS_PRICE} each</p>
       <Options optionType="scoops" />
 
       <h2>Toppings</h2>
-      <p>{TOPPINGS_PRICE}</p>
+      <p>{TOPPINGS_PRICE} each</p>
       <Options optionType="toppings" />
     </div>
   );

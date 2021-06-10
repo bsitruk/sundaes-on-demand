@@ -26,7 +26,7 @@ type OrderContextType = OptionCountsType & {
 
 const [useOrderCtx, CtxProvider] = createCtx<OrderContextType>();
 
-export function OrderProvider({ children }: { children: React.ReactNode }) {
+export const OrderProvider: React.FC = ({ children }) => {
   const [optionCounts, setOptionCounts] = useState<OptionCountsType>({
     scoops: new Map(),
     toppings: new Map(),
@@ -65,6 +65,6 @@ export function OrderProvider({ children }: { children: React.ReactNode }) {
       {children}
     </CtxProvider>
   );
-}
+};
 
 export { useOrderCtx };
