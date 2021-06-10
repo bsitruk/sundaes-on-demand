@@ -1,8 +1,7 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "../../../test-utils";
 import { server } from "../../../mocks/server";
 import { rest } from "msw";
 import OrderEntry from "../OrderEntry";
-import { OrderProvider } from "../../../contexts/OrderContext";
 
 test("Failing to fetch scoops should display an error alert", async () => {
   // Override /scoops and /toppings route to fail
@@ -27,7 +26,7 @@ test("Failing to fetch scoops should display an error alert", async () => {
     })
   );
 
-  render(<OrderEntry />, { wrapper: OrderProvider });
+  render(<OrderEntry />);
 
   // Wait until the two expected Alert component are displayed
   await waitFor(() => expect(screen.getAllByRole("alert")).toHaveLength(2));
