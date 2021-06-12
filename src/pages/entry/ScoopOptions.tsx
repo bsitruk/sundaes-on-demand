@@ -20,7 +20,7 @@ export const ScoopOptions = ({
         <Form.Control
           type="number"
           defaultValue={count}
-          onChange={(e) => updateCount(e.target.value)}
+          onChange={(e) => updateCount(e.target.value || "0")}
         />
       </Form.Group>
     </>

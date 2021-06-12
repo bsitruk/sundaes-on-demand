@@ -14,7 +14,7 @@ type OptionsProps = {
 export const Options = ({ optionType }: OptionsProps) => {
   const [items, setItems] = useState<Scoop[] | Topping[]>([]);
   const [error, setError] = useState("");
-  const { scoops, toppings, updateItemCount, totals } = useOrderCtx();
+  const { scoops, updateItemCount, totals } = useOrderCtx();
 
   useEffect(() => {
     axios
@@ -48,7 +48,6 @@ export const Options = ({ optionType }: OptionsProps) => {
         key={item.name}
         name={item.name}
         imagePath={item.imagePath}
-        count={toppings.get(item.name) || 0}
         updateCount={(count: string) =>
           updateItemCount(item.name, count, "toppings")
         }
