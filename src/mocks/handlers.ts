@@ -20,4 +20,8 @@ export const handlers = [
       ])
     );
   }),
+
+  rest.post("/order", (_req, res, ctx) => {
+    return res(ctx.text("1234567890"));
+  }),
 ];

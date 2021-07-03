@@ -15,6 +15,7 @@ type TotalsType = {
 };
 
 type OrderContextType = OptionCountsType & {
+  reset: () => void;
   updateItemCount: (
     itemName: string,
     newItemCount: string,
@@ -31,6 +32,13 @@ export const OrderProvider: React.FC = ({ children }) => {
     scoops: new Map(),
     toppings: new Map(),
   });
+
+  const reset: OrderContextType["reset"] = useCallback(() => {
+    setOptionCounts({
+      scoops: new Map(),
+      toppings: new Map(),
+    });
+  }, []);
 
   const updateItemCount: OrderContextType["updateItemCount"] = useCallback(
     (itemName, newItemCount, optionType) => {
@@ -61,7 +69,7 @@ export const OrderProvider: React.FC = ({ children }) => {
   }, [optionCounts]);
 
   return (
-    <CtxProvider value={{ ...optionCounts, updateItemCount, totals }}>
+    <CtxProvider value={{ ...optionCounts, updateItemCount, totals, reset }}>
       {children}
     </CtxProvider>
   );

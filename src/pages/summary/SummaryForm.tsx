@@ -19,11 +19,16 @@ const checkboxLabel = (
   </span>
 );
 
-export default function SummaryForm() {
+export default function SummaryForm({ onConfirm }: { onConfirm: () => void }) {
   const [tcChecked, setTcChecked] = useState(false);
 
   return (
-    <Form>
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onConfirm();
+      }}
+    >
       <Form.Group controlId="terms-and-conditions">
         <Form.Check
           type="checkbox"

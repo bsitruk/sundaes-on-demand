@@ -1,12 +1,12 @@
 import Container from "react-bootstrap/Container";
-import OrderEntry from "./pages/entry/OrderEntry";
+import AppRouter from "./AppRouter";
 import { OrderProvider } from "./contexts/OrderContext";
 
 function App() {
   return (
     <Container>
       <OrderProvider>
-        <OrderEntry />
+        <AppRouter />
       </OrderProvider>
     </Container>
   );

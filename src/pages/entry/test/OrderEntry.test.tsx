@@ -26,7 +26,8 @@ test("Failing to fetch scoops should display an error alert", async () => {
     })
   );
 
-  render(<OrderEntry />);
+  const next = jest.fn();
+  render(<OrderEntry next={next} />);
 
   // Wait until the two expected Alert component are displayed
   await waitFor(() => expect(screen.getAllByRole("alert")).toHaveLength(2));
