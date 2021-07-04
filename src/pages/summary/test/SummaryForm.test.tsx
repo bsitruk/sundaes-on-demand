@@ -7,7 +7,7 @@ import userEvent from "@testing-library/user-event";
 import SummaryForm from "../SummaryForm";
 
 beforeEach(() => {
-  render(<SummaryForm />);
+  render(<SummaryForm onConfirm={jest.fn()} />);
 });
 
 test("the checkbox is unchecked by default, and the button is disabled", () => {

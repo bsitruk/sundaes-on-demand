@@ -35,11 +35,9 @@ test("order phases for happy path", async () => {
   const grandTotal = screen.getByText("Total $", { exact: false });
   expect(grandTotal).toHaveTextContent("3.50");
 
-  const vanillaSummary = screen.getByText("1 Vanilla");
-  expect(vanillaSummary).toBeInTheDocument();
-
-  const cherriesSummary = screen.getByText("Cherries");
-  expect(cherriesSummary).toBeInTheDocument();
+  const optionItems = screen.getAllByRole("listitem");
+  const optionItemsText = optionItems.map((item) => item.textContent);
+  expect(optionItemsText).toEqual(["1 Vanilla", "Cherries"]);
 
   // accept terms and conditions and click button to confirm order
   const tcCheckbox = screen.getByRole("checkbox", {
@@ -51,7 +49,12 @@ test("order phases for happy path", async () => {
   userEvent.click(confirmOrderButton);
 
   // confirm order number on confirmation page
-  const orderNumber = await screen.findByText("Your order number is", {
+  const thankYouHeader = await screen.findByRole("heading", {
+    name: /thank you/i,
+  });
+  expect(thankYouHeader).toBeInTheDocument();
+
+  const orderNumber = screen.getByText("Your order number is", {
     exact: false,
   });
   expect(orderNumber).toHaveTextContent("1234567890");
@@ -60,7 +63,10 @@ test("order phases for happy path", async () => {
   const newOrderButton = screen.getByRole("button", { name: /new order/i });
   userEvent.click(newOrderButton);
 
-  // check that scoops and topping subtotals have b een reset
+  // check that scoops and topping subtotals have been reset
+  expect(screen.getByText("Scoops total: $0.00")).toBeInTheDocument();
+  expect(screen.getByText("Toppings total: $0.00")).toBeInTheDocument();
+
   // do we need to await anything to avoid test errors ?
   await screen.findByRole("spinbutton", { name: /vanilla/i });
   await screen.findByRole("checkbox", { name: /cherries/i });

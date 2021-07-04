@@ -56,7 +56,7 @@ test("Update toppings subtotal when toppings change", async () => {
 
 describe("Grand Total", () => {
   beforeEach(() => {
-    render(<OrderEntry />);
+    render(<OrderEntry next={jest.fn()} />);
   });
 
   it("should update properly if scoops is added first", async () => {
